@@ -1,0 +1,31 @@
+{
+  "name": "vigenere-cipher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-packager . \"vigenere-cipher\" --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icon.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Vigenere Cipher\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agungadipurwanto/vigenere-cipher.git"
+  },
+  "author": "Agung Adi Purwanto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agungadipurwanto/vigenere-cipher/issues"
+  },
+  "homepage": "https://github.com/agungadipurwanto/vigenere-cipher#readme",
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-packager": "^14.0.6"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "clipboard": "^2.0.4",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0"
+  }
+}

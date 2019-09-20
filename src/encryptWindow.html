@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vigenere Cipher | Encrypt</title>
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>
+    const $ = require('jquery')
+    require('popper.js')
+    require('bootstrap')
+  </script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Encrypt <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="decryptWindow.html">Decrypt</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <div id="alert"></div>
+      <form class="mt-3" id="encrypt-plaintext">
+        <div class="form-group">
+          <input type="text" class="form-control" id="encryptkey" placeholder="Encrypt Key" required>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="plaintext" rows="3" placeholder="Plaintext" required></textarea>
+        </div>
+        <div class="form-group">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="fileinput">
+            <label class="custom-file-label" for="fileinput">Choose file</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col d-flex justify-content-end">
+            <button type="submit" class="btn btn-dark">Encrypt</button>
+          </div>
+        </div>
+      </form>
+      <div class="mt-3 mb-5">
+        <div class="form-group">
+          <label for="encryptedtext">Encrypted Text</label>
+          <textarea class="form-control" id="encryptedtext" rows="3" placeholder="Encrypted Text" readonly></textarea>
+        </div>
+        <div class="form-row">
+          <div class="col d-flex justify-content-end">
+            <button class="btn btn-outline-dark mx-2" id="btn-save"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-outline-dark mx-2" id="btn-clear">Clear</button>
+            <button type="submit" class="btn btn-dark ml-2" id="btn-copy" data-clipboard-target="#encryptedtext">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer bg-dark mt-auto p-3">
+    <div class="container">
+      <span class="text-white">&copy; 2019, Agung Adi Purwanto.</span>
+    </div>
+  </footer>
+  <script src="../assets/clipboardjs/clipboard.min.js"></script>
+  <script src="../assets/fontawesome/js/all.min.js"></script>
+  <script>
+    const { ipcRenderer } = require('electron')
+
+    $(document).ready(() => {
+      new ClipboardJS('#btn-copy')
+    })
+
+    ipcRenderer.on('encrypt-plaintext-reply', (evt, arg) => {
+      $('#encryptedtext').val(arg)
+    })
+
+    ipcRenderer.on('encrypt-savetofile-reply', (evt, arg) => {
+      $('#alert').html('<div class="alert alert-success alert-dismissible fade show" role="alert">' + arg +'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + '</div>')
+    })
+
+    ipcRenderer.on('encrypt-fileinput-reply', (evt, arg) => {
+      const { filepath, contents } = arg
+      $('label[for="fileinput"]').text(filepath)
+      $('#plaintext').val(contents)
+    })
+
+    $('#encrypt-plaintext').submit(e => {
+      const encryptkey = $('#encryptkey').val()
+      const plaintext = $('#plaintext').val()
+
+      const data = {
+        key: encryptkey,
+        text: plaintext
+      }
+
+      e.preventDefault()
+
+      ipcRenderer.send('encrypt-plaintext', data)
+    })
+
+    $('#fileinput').click(e => {
+      e.preventDefault()
+
+      ipcRenderer.send('encrypt-fileinput')
+    })
+
+    $('#btn-clear').click(e => {
+      if ($('#encryptedtext').val() != '') {
+        $('#encryptedtext').val('')
+      }
+    })
+
+    $('#btn-save').click(e => {
+      if ($('#encryptedtext').val() == '') {
+        $('#alert').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">' + 'Encrypted text cannot be empty.' +'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + '</div>')
+      } else {
+        ipcRenderer.send('encrypt-savetofile', $('#encryptedtext').val())
+      }
+    })
+  </script>
+</body>
+</html>
