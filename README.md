@@ -2,6 +2,8 @@
 
 This is application and implementation from method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword.
 
+[![Screenshot](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG?token=ANCB5MC5DHJXRHIWY6OYWRK5RZM5Y "Screenshot")](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG?token=ANCB5MC5DHJXRHIWY6OYWRK5RZM5Y "Screenshot")
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -44,6 +46,10 @@ Microsoft Windows x32
 npm run build
 ```
 
+## Download
+
+[Microsoft Windows x32](https://github.com/agungadipurwanto/vigenere-cipher/raw/master/release-builds/vigenere-cipher-win32-ia32.zip)
+
 ## Built With
 
 * [Electron](https://electronjs.org/) - Javascript Framework for Desktop Application
@@ -59,7 +65,7 @@ npm run build
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
