@@ -2,7 +2,7 @@
 
 This is application and implementation from method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword.
 
-[![Screenshot](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG?token=ANCB5MC5DHJXRHIWY6OYWRK5RZM5Y "Screenshot")](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG?token=ANCB5MC5DHJXRHIWY6OYWRK5RZM5Y "Screenshot")
+[![Screenshot](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG "Screenshot")](https://raw.githubusercontent.com/agungadipurwanto/vigenere-cipher/master/screenshots/vigenere-cipher.PNG "Screenshot")
 
 ## Getting Started
 
